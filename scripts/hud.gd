@@ -142,6 +142,9 @@ func _build_menu():
 		b.custom_minimum_size = Vector2(160, 60)
 		b.add_theme_font_size_override("font_size", 22)
 		b.pressed.connect(_menu_btn.bind(pair[1]))
+		b.gui_input.connect(func(ev):
+			if ev is InputEventScreenTouch and ev.pressed:
+				_menu_btn(pair[1]))
 		h.add_child(b)
 		if pair[1] == "quality":
 			qual_btn = b

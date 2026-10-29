@@ -102,15 +102,23 @@ func _ui():
 func _btn(text: String, cb: Callable) -> Button:
 	var b = Button.new()
 	b.text = text
-	b.custom_minimum_size = Vector2(380, 74)
-	b.add_theme_font_size_override("font_size", 30)
+	b.custom_minimum_size = Vector2(420, 80)
+	b.add_theme_font_size_override("font_size", 32)
 	var sb = StyleBoxFlat.new()
-	sb.bg_color = Color(0.12, 0.08, 0.06, 0.8)
+	sb.bg_color = Color(0.12, 0.08, 0.06, 0.85)
 	sb.border_color = Color(0.35, 1.0, 0.92)
 	sb.set_border_width_all(3)
-	sb.set_corner_radius_all(10)
+	sb.set_corner_radius_all(12)
 	b.add_theme_stylebox_override("normal", sb)
+	var sb_pressed = sb.duplicate()
+	sb_pressed.bg_color = Color(0.2, 0.6, 0.55, 0.95)
+	b.add_theme_stylebox_override("pressed", sb_pressed)
+	b.add_theme_stylebox_override("hover", sb)
 	b.pressed.connect(cb)
+	# Direct touch handler fallback for mobile screens
+	b.gui_input.connect(func(ev):
+		if ev is InputEventScreenTouch and ev.pressed:
+			cb.call())
 	return b
 
 func _process(delta):
