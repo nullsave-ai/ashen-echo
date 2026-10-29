@@ -241,10 +241,10 @@ func _physics_process(delta):
 	if (controls and controls.consume("crouch")) or Input.is_action_just_pressed("crouch"):
 		crouching = not crouching
 	var fire_held = Input.is_action_pressed("fire") or (controls != null and controls.btn("fire"))
-	var want_sprint = (mv.length() > 0.92 and controls != null) or Input.is_action_pressed("sprint")
+	var want_sprint = (mv.length() > 0.88 and controls != null) or Input.is_action_pressed("sprint") or (controls != null and controls.btn("sprint"))
 	sprinting = want_sprint and not aiming and not crouching and mv.length() > 0.1 and not reloading
 	# camera look
-	var sens = 0.0042 * (0.55 if aiming else 1.0)
+	var sens = 0.0070 * (0.55 if aiming else 1.0)
 	yaw -= look.x * sens
 	pitch = clampf(pitch - look.y * sens, -0.95, 1.05)
 	var basis = Basis(Vector3.UP, yaw)
