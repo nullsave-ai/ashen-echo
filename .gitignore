@@ -1,0 +1,10 @@
+.godot/
+*.translation
+builds/
+export/
+*.apk
+*.aab
+*.idsig
+.DS_Store
+Thumbs.db
+*.tmp
